@@ -1,10 +1,11 @@
 import argparse
 import zipfile
+from lxml import etree
 from datetime import datetime
 from pathlib import Path
 import uuid
 
-root = Path(__file__).parent
+root = Path("/storage/emulated/0/Download/gsmaps/")
 
 class Setup:
 	def __init__(self,
@@ -13,28 +14,31 @@ class Setup:
 		resize_textures, astc_blocks_size, 
 		format_xml, save_method, dirname
 	):
-		self.mod = mod
-		self.mod_version = mod_version
-		self.compress_mod = compress_mod
-		self.compress_textures = compress_textures
-		self.resize_textures = resize_textures
-		self.astc_blocks_size = astc_blocks_size
-		self.format_xml = format_xml
-		self.method = save_method
-		self.dirname = dirname
-		if self.mod_version == "fs22" or str(Path(self.mod).stem)[:4].lower() == "fs22":
-			self.temp()
+		if Path(mod).absolute().exists():
+			self.mod = str(Path(mod).absolute())
+			self.mod_version = mod_version
+			self.compress_mod = compress_mod
+			self.compress_textures = compress_textures
+			self.resize_textures = resize_textures
+			self.astc_blocks_size = astc_blocks_size
+			self.format_xml = format_xml
+			self.method = save_method
+			self.dirname = dirname
+			self.temp_mod_dir = str(root / "mods" / str(uuid.uuid4()))
+			if self.mod_version == "fs22" or str(Path(self.mod).stem)[:4].lower() == "fs22":
+				self.create_setup_file()
+			else:
+				print("Set the game version or index a mod with the FS22 prefix.")
 		else:
-			print("Set the game version or index a mod with the FS22 prefix.")
+			print(f"The mod could not be found: {Path(mod).absolute()};")
+	def create_setup_file(self):
+		Path(self.temp_mod_dir).mkdir(parents=True)
+		filename = Path(self.temp_mod_dir) / "setup.xml"
+		root = etree.Element("setup")
+		root.set("mod", self.mod)
+		tree = etree.ElementTree(root)
+		tree.write(filename, standalone=False, xml_declaration=True)
 
-	def temp(self):
-		time = datetime.now().strftime("%d%m%Y%H%M%S")
-		mod_dir = str(root / str(uuid.uuid4()))
-		print(mod_dir)
-		
-	def generate_setup(self):
-		pass
-		
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(prog="gsmaps", description=None, epilog="Currently, the converter only supports Farming Simulator 2022 mods.")
 	parser.add_argument("-m", "--mod", required=True, help=None)
@@ -48,20 +52,3 @@ if __name__ == "__main__":
 	parser.add_argument("-d", "--dirname", default="mapDE", choices=["map", "mapDE"], help=None)
 	args = vars(parser.parse_args())
 	Setup(**args)
-"""
--m, --mod,
--v, --mod-version (ex: fs19, fs22, fs25) *Obs: It only accepts fs22 as it is not compatible with other versions.
--c, --compress **Obs: Compress the mod into a .gar file, not a zip file.
--t, --textures-compress
--r, --resize-textures
--a, --astc-blocks-size
-"""
-""" astc blocks available
-4x4: 8.00 bpp        10x5: 2.56 bpp
-5x4: 6.40 bpp        10x6: 2.13 bpp
-5x5: 5.12 bpp         8x8: 2.00 bpp
-6x5: 4.27 bpp        10x8: 1.60 bpp
-6x6: 3.56 bpp       10x10: 1.28 bpp
-8x5: 3.20 bpp       12x10: 1.07 bpp
-8x6: 2.67 bpp       12x12: 0.89 bpp
-"""
