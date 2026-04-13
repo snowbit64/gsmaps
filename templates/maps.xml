@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<maps>
+	<map
+		id="map"
+		configFilename="$data/maps/map/map.xml"
+		className="Mission00"
+		filename="$dataS/scripts/missions/mission00.lua"
+		defaultVehiclesXMLFilename="$data/maps/map/vehicles.xml"
+		defaultPlaceablesXMLFilename="$data/maps/map/placeables.xml"
+		defaultItemsXMLFilename="$data/maps/map/items.xml">
+		<title>$l10n_map_title</title>
+		<iconFilename>$data/maps/map/preview.png</iconFilename>
+	</map>
+	<map
+		id="mapDE"
+		configFilename="$data/maps/mapDE/map.xml"
+		className="Mission00"
+		filename="$dataS/scripts/missions/mission00.lua"
+		defaultVehiclesXMLFilename="$data/maps/mapDE/vehicles.xml"
+		defaultPlaceablesXMLFilename="$data/maps/mapDE/placeables.xml"
+		defaultItemsXMLFilename="$data/maps/mapDE/items.xml">
+		<title>$l10n_mapDE_title</title>
+		<iconFilename>$data/maps/mapDE/preview.png</iconFilename>
+	</map>
+</maps>

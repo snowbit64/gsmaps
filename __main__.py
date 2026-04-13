@@ -1,11 +1,18 @@
 import argparse
 import zipfile
+from datetime import datetime
 from pathlib import Path
+import uuid
 
 root = Path(__file__).parent
 
 class Setup:
-	def __init__(self, mod, mod_version, compress_mod, compress_textures, resize_textures, astc_blocks_size, format_xml):
+	def __init__(self,
+		mod, mod_version, 
+		compress_mod, compress_textures, 
+		resize_textures, astc_blocks_size, 
+		format_xml, save_method, dirname
+	):
 		self.mod = mod
 		self.mod_version = mod_version
 		self.compress_mod = compress_mod
@@ -13,11 +20,18 @@ class Setup:
 		self.resize_textures = resize_textures
 		self.astc_blocks_size = astc_blocks_size
 		self.format_xml = format_xml
+		self.method = save_method
+		self.dirname = dirname
 		if self.mod_version == "fs22" or str(Path(self.mod).stem)[:4].lower() == "fs22":
-			self.generate_setup()
+			self.temp()
 		else:
 			print("Set the game version or index a mod with the FS22 prefix.")
 
+	def temp(self):
+		time = datetime.now().strftime("%d%m%Y%H%M%S")
+		mod_dir = str(root / str(uuid.uuid4()))
+		print(mod_dir)
+		
 	def generate_setup(self):
 		pass
 		
@@ -30,6 +44,8 @@ if __name__ == "__main__":
 	parser.add_argument("-r", "--resize-textures", default=False, action="store_true", help=None)
 	parser.add_argument("-a", "--astc-blocks-size", default="6x6", choices=["4x4", "5x4", "5x5", "6x5", "6x6", "8x5", "8x6", "8x8", "10x5", "10x6", "10x8", "10x10", "12x10", "12x12"], help=None)
 	parser.add_argument("-x", "--format-xml", default=False, action="store_true", help=None)
+	parser.add_argument("-s", "--save-method", default="replace", choices=["add", "replace"], help=None)
+	parser.add_argument("-d", "--dirname", default="mapDE", choices=["map", "mapDE"], help=None)
 	args = vars(parser.parse_args())
 	Setup(**args)
 """

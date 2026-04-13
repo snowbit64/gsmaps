@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<setup>
+<setup mod="">
 	<assets>
 		<fs19 dirname="" filename=""/>
 		<fs20 dirname="" filename=""/>
@@ -8,15 +8,7 @@
 		<fs25 dirname="" filename=""/>
 		<fs26 dirname="" filename=""/>
 	</assets>
-	<mod>
-		<version></version>
-		<name></name>
-		<type></type>
-		<source></source>
-		<files>
-			<file path="" type="texture" id=""/>
-		</files>
-	</mod>
+	<map version="" name="" icon="" config=""/>
 </setup>
 <!-- types
 texture
