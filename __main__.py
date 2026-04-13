@@ -6,7 +6,7 @@ from pathlib import Path
 import uuid
 
 root = Path("/storage/emulated/0/Download/gsmaps/")
-
+"""teste"""
 class Setup:
 	def __init__(self,
 		mod, mod_version, 
