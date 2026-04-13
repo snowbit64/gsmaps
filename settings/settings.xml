@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
 	<assets>
-		<fs19 path=""/>
-		<fs20 path=""/>
-		<fs22 path=""/>
-		<fs23 path=""/>
-		<fs25 path=""/>
-		<fs26 path=""/>
+		<fs19 filename=""/>
+		<fs20 filename=""/>
+		<fs22 filename=""/>
+		<fs23 filename=""/>
+		<fs25 filename=""/>
+		<fs26 filename=""/>
 	</assets>
 </settings>
+<!-- 
+<fs22 filename="" dirname="" fileType="zip,rar,gzip">
+	-- assets divided into parts --
+	<file assetsPart="1" filename="./data01.zip"/>
+	<file assetsPart="2" filename="./data02.zip"/>
+	<file assetsPart="3" filename="./data03.zip"/>
+	-- specifying type --
+	<file type="foliage" filename="./fs22/foliage.zip"/>
+	<file type="shaders" filename="./fs22/shaders.zip"/>
+	<file type="objects" filename="./fs22/objects.zip"/>
+</fs22>
+-->
